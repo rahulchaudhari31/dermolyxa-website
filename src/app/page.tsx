@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
@@ -10,10 +11,12 @@ import { TreatmentsSection } from "@/components/TreatmentsSection";
 import { About } from "@/components/About";
 import { HowItWorks } from "@/components/HowItWorks";
 import { ResultsSection } from "@/components/ResultsSection";
+import { Testimonials } from "@/components/Testimonials";
 import { BookingForm } from "@/components/booking/BookingForm";
 import { JsonLd } from "@/components/JsonLd";
 import { CONTACT, SOCIALS } from "@/lib/site";
 import { faqs } from "@/data/faqs";
+import { images } from "@/data/images";
 import { faqJsonLd } from "@/lib/seo";
 
 const doctors = [
@@ -21,16 +24,19 @@ const doctors = [
     name: "Dr. Elena Marchetti",
     role: "Medical Director",
     focus: "Regenerative Medicine",
+    image: images.doctors.doctor1,
   },
   {
     name: "Dr. Adrian Cole",
     role: "Lead Dermatologist",
     focus: "Laser & Skin Science",
+    image: images.doctors.doctor2,
   },
   {
     name: "Dr. Sofia Nakamura",
     role: "Aesthetic Surgeon",
     focus: "Facial Contouring",
+    image: images.doctors.doctor3,
   },
 ];
 
@@ -39,6 +45,7 @@ const pricing = [
     name: "Essential",
     price: "$290",
     tagline: "Signature skin ritual",
+    image: images.pricing.essential,
     features: [
       "Skin analysis & consultation",
       "Medical-grade facial",
@@ -51,6 +58,7 @@ const pricing = [
     name: "Regenerative",
     price: "$690",
     tagline: "Most requested",
+    image: images.pricing.regenerative,
     features: [
       "Everything in Essential",
       "PRP regeneration therapy",
@@ -63,6 +71,7 @@ const pricing = [
     name: "Signature",
     price: "$1,450",
     tagline: "Full-face renewal",
+    image: images.pricing.signature,
     features: [
       "Everything in Regenerative",
       "Filler & neuromodulator artistry",
@@ -84,6 +93,8 @@ export default function HomePage() {
 
       <ResultsSection />
 
+      <Testimonials />
+
       <section id="doctors" className="scroll-mt-24 py-20 lg:py-28">
         <Container>
           <SectionHeading
@@ -96,12 +107,14 @@ export default function HomePage() {
             {doctors.map((doctor, index) => (
               <Reveal key={doctor.name} delay={index * 0.08}>
                 <Card className="h-full text-center">
-                  <div className="mx-auto flex h-24 w-24 items-center justify-center rounded-full border border-gold/30 bg-gold/5 font-serif text-3xl text-gold">
-                    {doctor.name
-                      .split(" ")
-                      .slice(-2)
-                      .map((n) => n[0])
-                      .join("")}
+                  <div className="relative mx-auto h-28 w-28 overflow-hidden rounded-full border border-gold/30 bg-gold/5">
+                    <Image
+                      src={doctor.image}
+                      alt={doctor.name}
+                      fill
+                      sizes="112px"
+                      className="object-cover"
+                    />
                   </div>
                   <h3 className="mt-6 font-serif text-2xl text-ivory">
                     {doctor.name}
@@ -138,10 +151,23 @@ export default function HomePage() {
                   }`}
                 >
                   {tier.highlighted ? (
-                    <span className="absolute right-6 top-6 rounded-full bg-gold-gradient px-3 py-1 text-[0.6rem] font-medium uppercase tracking-luxe text-bg">
+                    <span className="absolute right-6 top-6 z-10 rounded-full bg-gold-gradient px-3 py-1 text-[0.6rem] font-medium uppercase tracking-luxe text-bg">
                       Popular
                     </span>
                   ) : null}
+                  <div className="relative mb-6 aspect-[16/10] overflow-hidden rounded-xl border border-gold/15">
+                    <Image
+                      src={tier.image}
+                      alt={tier.name}
+                      fill
+                      sizes="(max-width: 1024px) 90vw, 30vw"
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                    <div
+                      aria-hidden
+                      className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"
+                    />
+                  </div>
                   <h3 className="font-serif text-2xl text-ivory">{tier.name}</h3>
                   <p className="mt-1 text-xs uppercase tracking-luxe text-gold/80">
                     {tier.tagline}

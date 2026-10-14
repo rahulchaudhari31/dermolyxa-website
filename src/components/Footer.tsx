@@ -14,7 +14,7 @@ export function Footer() {
         className="pointer-events-none absolute inset-x-0 -top-40 h-64 bg-gold-radial"
       />
       <Container className="relative py-16 lg:py-20">
-        <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
+        <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1fr_1.3fr]">
           <div>
             <Logo height={56} />
             <p className="mt-6 max-w-xs font-serif text-xl font-light italic leading-snug text-gold/90">
@@ -50,7 +50,7 @@ export function Footer() {
             <h3 className="text-xs font-medium uppercase tracking-luxe text-gold">
               Contact
             </h3>
-            <ul className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-ivory/60">
+            <ul className="mt-5 space-y-3 text-sm text-ivory/60">
               <li>
                 <a
                   href={CONTACT.phoneHref}
@@ -58,9 +58,6 @@ export function Footer() {
                 >
                   {CONTACT.phone}
                 </a>
-              </li>
-              <li aria-hidden className="text-gold/40">
-                •
               </li>
               <li>
                 <a
@@ -70,10 +67,7 @@ export function Footer() {
                   {CONTACT.email}
                 </a>
               </li>
-              <li aria-hidden className="text-gold/40">
-                •
-              </li>
-              <li className="leading-relaxed">{CONTACT.address}</li>
+              <li className="max-w-[16rem] leading-relaxed">{CONTACT.address}</li>
             </ul>
 
             <Button href="/#contact" size="sm" className="mt-6">
